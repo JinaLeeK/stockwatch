@@ -1,0 +1,146 @@
+
+navbar {
+    margin-bottom: 10px;
+}
+.main {
+    border-bottom: #333 1px solid;
+    /*padding: 30px 0 ;*/
+}
+html, body, .content {
+    height: 100%;
+}
+.content .left {
+    height: 93%;
+    overflow-y : scroll;
+}
+
+.artist-header {
+    padding-bottom: 20px;
+    margin-bottom:20px;
+    border-bottom:solid 1px #333;
+}
+.artist-thumb {
+    width: 80px;
+    height:auto;
+    float:left;
+    margin-right:10px;
+}
+
+.artist-albums .well {
+    margin-bottom:20px;
+    overflow: auto;
+    min-height: 400px;
+}
+
+.album {
+    text-align: center;
+    background: #333;
+    padding: 10px 20px;
+    border: #666 1px solid;
+}
+
+.album-thumb {
+    width: 100%;
+}
+.title {
+    margin-bottom: 0;
+    display: inline-block;
+}
+.title:hover {
+    font-weight: bold;
+    cursor: pointer;
+}
+.small-hr {
+    margin: 5px 0;
+}
+.price {
+    font-size: 1.4em;
+    color: #e6e6e6;
+}
+.text-green{
+    color:limegreen;
+}
+.text-small {
+    font-size: .8em;
+}
+.highcharts-container {
+    width: 95%;
+}
+.stocks-container {
+    background-color: #120d24 ;
+    margin-top: 5px;
+    margin-left: 0;
+    margin-bottom: 10px;
+    width: 99%;
+    padding: 8px;
+}
+.stock-block {
+    border: 1px solid #bbb;
+    height: 50px;
+    line-height:50px;
+    text-align: center;
+    border-left-width: 5px;
+    background-color: #fff;
+    margin-bottom: 2px;
+}
+.stock-block:hover {
+    border: 1px solid darkred;
+    border-left-width: 5px;
+}
+.stock-block .symbol {
+    color: #000;
+    display: inline-block;
+}
+.stock-block span.quote {
+    color: #195a2d;
+    font-size: 1.2em;
+}
+.stock-block span.glyphicon {
+    color: gray;
+    height: 37px;
+    line-height: 37px;
+    vertical-align: middle;
+}
+.stock-block span.glyphicon:hover {
+    cursor:pointer;
+}
+.dropzone {
+    height: 70px;
+    font-size: 2em;
+}
+
+.dnd-drag-over{
+    border: 3px dashed #878080;
+}
+
+.text-gray {
+    color: #888888;
+}
+.news-title:hover {
+    text-decoration: none;    
+}
+.errModal .modal-content{
+    background:#80434f;
+    color: #fff;
+    font-size: 1.3em;
+}
+
+::-webkit-scrollbar .left{
+      width: 15px;
+} /* this targets the default scrollbar (compulsory) */
+
+::-webkit-scrollbar-track .left{
+      background-color: #b46868;
+} /* the new scrollbar will have a flat appearance with the set background color */
+ 
+::-webkit-scrollbar-thumb .left{
+      background-color: rgba(0, 0, 0, 0.2); 
+} /* this will style the thumb, ignoring the track */
+ 
+::-webkit-scrollbar-button .left{
+      background-color: #7c2929;
+} /* optionally, you can style the top and the bottom buttons (left and right for horizontal bars) */
+ 
+::-webkit-scrollbar-corner .left{
+      background-color: black;
+} /* if both the vertical and the horizontal bars appear, then perhaps the right bottom corner also needs to be styled */
