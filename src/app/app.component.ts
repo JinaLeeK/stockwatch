@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-// import {RouteConfig, ROUTER_DIRECTIVES } from '@angular/router-deprecated';;
+import {RouterConfig, ROUTER_DIRECTIVES } from '@angular/router';;
 
 import { NavbarComponent} from './navbar/navbar.component';
 import { SearchComponent} from './search/search.component';
