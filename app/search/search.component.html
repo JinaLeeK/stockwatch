@@ -1,0 +1,80 @@
+<h1>Watch Stock?</h1>
+<p class="lead">Use the ngStockWatch app to explore stock values and find your interest.<br> All you need to do is to click or drag your interesting company to see the stock value chart.</p>
+<form>
+    <div class="form-group">
+        <input type="text"  [(ngModel)]="searchStr" name="searchStr"  (keyup.enter)="searchStock()" class="form-control" placeholder="Search stocks (Enter a part of company name or company symbol)"/>
+    </div>
+</form>
+<div *ngIf="quoteRes" class="content">
+    <div class="col-md-4" [ngClass]='{"left":isOverflow}'>
+        <div *ngFor="let res of quoteRes">
+            <div class="row">
+                <div class="col-md-12">
+                    <div dnd-draggable [dragEnabled]="true" dragData="{{[res.Symbol, res.LastPrice, res.Exchange]}}" class="search-res well">
+                        <!--<h4><a routerLink="/artist/{{res.id}}">{{res.name}}</a></h4>-->
+                        <h4 (click)="modalOpen(res)" class="title">{{res.Name}}</h4>
+                        <div>
+                            ({{res.Exchange}}:{{res.Symbol}})
+                        </div>
+                        <hr class="small-hr">
+                        <div class="price">
+                            <strong>{{res.LastPrice}}</strong>
+                            &nbsp; (<span class="text-small glyphicon" [ngClass]="{
+                                    'text-green glyphicon-arrow-up':res.isPositive,
+                                    'text-danger glyphicon-arrow-down': !res.isPositive
+                                    }">{{res.Change | number:'1.2-2'}}/{{res.ChangePercent | number:'1.2-2'}}%</span>)
+                        </div>
+                        <div>As of {{res.Timestamp | date:'medium'}}</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<a href="" class="btn btn-inverse btn-block">Load More</a>-->
+    </div>
+    <div class="col-md-8">
+        <div dnd-droppable draggable="true" (onDragOver)="dragOver($event)" (onDropSuccess)="viewChart($event)" class="stocks-container row" [ngClass]="{'dnd-drag-over': dragedOver, 'visible':chartVisible,  'hidden':!chartVisible}">
+            <div *ngIf="stocks.length > 0">
+                <div class="stock-block col-md-3 col-sm-4 col-xs-6" *ngFor="let stock of stocks">
+                    <h5 class="symbol">{{stock[0]}}</h5> <span class="quote">{{stock[1]}}</span><span (click)="stockRemove(stock)" class="pull-right glyphicon glyphicon-remove"></span>
+                </div>
+            </div>
+            <div class="dropzone text-center" *ngIf="stocks.length == 0">
+                Drag Here
+            </div>
+        </div>
+        <br>
+        <chart type="stockChart" [options]="options" (load) = "saveInstance($event.context)"></chart>
+        
+    </div>
+</div>
+
+<modal #modal>
+    <modal-header [show-close]="true">
+        <h4 class="modal-title">{{modalName}}&nbsp; <span class="small text-gray">({{modalSymbol}}, {{modalEx}})</span></h4>
+    </modal-header>
+    <modal-body>
+        <table class="table table-responsive">
+            <tr class="small text-gray"><td>Price(USD)</td><td>Today's change</td><td>1year change</td><td>Volume</td></tr>
+            <tr><td>{{modalLastPrice}}</td>
+                <td><span class='glyphicon' [ngClass]="{'glyphicon-arrow-up':isChPositive, 'glyphicon-arrow-down':!isChPositive}"></span>&nbsp;{{modalChange | number:'1.2-2'}}/{{modalPercent | number:'1.2-2'}}%</td>
+                <td><span class='glyphicon' [ngClass]="{'glyphicon-arrow-up':isChYPositive, 'glyphicon-arrow-down':!isChYPositive}"></span>&nbsp;{{modalChangePercentYTD | number:'1.2-2'}}%</td>
+                <td>{{modalVolume}}</td>
+            </tr>
+            <tr class="small text-gray"><td>Open</td><td>High</td><td>Low</td><td>Mkt.Cap</td>
+            <tr><td>{{modalOpenP}}</td><td>{{modalHigh}}</td><td>{{modalLow}}</td><td>{{modalMarketCap/100000000 | number:'1.2-2'}}B</td></tr>
+        </table>
+        <h4>Latest News</h4>
+        <div *ngFor="let res of newsRes" class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <h5><a class="news-title" href="{{res.link}}" target="_blank">{{res.title}}</a></h5>
+                <div class="small text-gray">{{res.publishedDate | date:'medium'}}</div>
+                <hr>
+            </div>
+        </div>
+    </modal-body>
+</modal>
+
+<modal #errModal class="errModal">
+    <modal-header [show-close]="true">{{errMsg}}</modal-header>
+</modal>
