@@ -15,13 +15,13 @@ export class StockService{
     };
 
     searchStock(str:string) {
-        this.searchUrl = "http://dev.markitondemand.com/MODApis/Api/v2/Lookup/json?input=" + str;
+        this.searchUrl = "//dev.markitondemand.com/MODApis/Api/v2/Lookup/json?input=" + str;
 
         return this._http.get(this.searchUrl).map(res => res.json());
     }
 
     getQuote(str:string) {
-        this.quoteUrl = "http://dev.markitondemand.com/Api/v2/Quote/json?symbol=" + str;
+        this.quoteUrl = "//dev.markitondemand.com/Api/v2/Quote/json?symbol=" + str;
         return this._http.get(this.quoteUrl).map(res => res.json());
     }
 
@@ -29,7 +29,7 @@ export class StockService{
         let parameters:string = '{"Normalized": false, "NumberOfDays": 365, "DataPeriod": "Day",'
             + '"Elements": [{"Symbol":"' + str + '", "Type": "price", "Params": ["c"] }] }';
 
-        this.dataUrl = "http://dev.markitondemand.com/Api/v2/InteractiveChart/json?parameters=" + parameters;
+        this.dataUrl = "//dev.markitondemand.com/Api/v2/InteractiveChart/json?parameters=" + parameters;
         return this._http.get(this.dataUrl).map(res => res.json());
 
     }

@@ -116,7 +116,7 @@ export class SearchComponent  {
                             },
                             (error) => {
                                 this.errMsg = 'Something trouble happened. Try again after a few seconds.';
-                                this.modal.open('lg');
+                                this.errModal.open('lg');
                             }
                         )
                     }
@@ -129,7 +129,7 @@ export class SearchComponent  {
             },
             (err) => {
                 this.errMsg = 'Something trouble happened. Try again after a few seconds.';
-                this.modal.open('lg');
+                this.errModal.open('lg');
             }
         )
         } else {
